@@ -1,4 +1,4 @@
-package br.edu.infnet.appvenda;
+package br.edu.infnet.appvenda.loader;
 
 import br.edu.infnet.appvenda.model.domain.Moto;
 import br.edu.infnet.appvenda.model.service.MotoService;
@@ -41,6 +41,7 @@ public class MotoLoader implements ApplicationRunner {
             moto.setEstoque(Boolean.valueOf(campos[5]));
             moto.setQuilometragem(campos[7]);
             moto.setCilindrada(campos[7]);
+            moto.setInjecaoEletronica(Boolean.valueOf(campos[8]));
 
 //            System.out.println("[Moto] - " + moto.toString());
             motoService.incluir(moto);

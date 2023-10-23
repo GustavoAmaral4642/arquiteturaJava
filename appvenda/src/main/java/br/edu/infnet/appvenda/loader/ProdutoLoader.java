@@ -1,4 +1,4 @@
-package br.edu.infnet.appvenda;
+package br.edu.infnet.appvenda.loader;
 
 import br.edu.infnet.appvenda.model.domain.Carro;
 import br.edu.infnet.appvenda.model.domain.Moto;
@@ -35,7 +35,7 @@ public class ProdutoLoader implements ApplicationRunner {
         while(linha != null) {
             campos = linha.split(";");
 
-            switch (campos[8]){
+            switch (campos[9]){
                 case "C":
                     Carro carro = new Carro();
 

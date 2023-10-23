@@ -1,4 +1,4 @@
-package br.edu.infnet.appvenda;
+package br.edu.infnet.appvenda.loader;
 
 import br.edu.infnet.appvenda.model.domain.Vendedor;
 import br.edu.infnet.appvenda.model.service.VendedorService;

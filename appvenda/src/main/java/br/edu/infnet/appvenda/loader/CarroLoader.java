@@ -1,4 +1,4 @@
-package br.edu.infnet.appvenda;
+package br.edu.infnet.appvenda.loader;
 
 import br.edu.infnet.appvenda.model.domain.Carro;
 import br.edu.infnet.appvenda.model.service.CarroService;
@@ -41,6 +41,7 @@ public class CarroLoader implements ApplicationRunner {
             carro.setEstoque(Boolean.valueOf(campos[5]));
             carro.setQuilometragem(campos[6]);
             carro.setMotor(campos[7]);
+            carro.setEstoque(Boolean.valueOf(campos[8]));
 
 //            System.out.println("[Carro] - " + carro.toString());
 
