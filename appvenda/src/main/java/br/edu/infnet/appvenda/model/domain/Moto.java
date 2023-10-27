@@ -1,6 +1,11 @@
 package br.edu.infnet.appvenda.model.domain;
 
-public class Moto extends Produto{
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TMoto")
+public class Moto  extends Produto{
 
     private String cilindrada;
     private boolean injecaoEletronica;

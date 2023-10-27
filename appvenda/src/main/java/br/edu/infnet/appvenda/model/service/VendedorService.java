@@ -1,6 +1,8 @@
 package br.edu.infnet.appvenda.model.service;
 
 import br.edu.infnet.appvenda.model.domain.Vendedor;
+import br.edu.infnet.appvenda.model.repository.VendedorRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -10,15 +12,15 @@ import java.util.Map;
 @Service
 public class VendedorService {
 
-    private Map<String, Vendedor> mapaVendedor = new HashMap<String,Vendedor>();
+    @Autowired
+    private VendedorRepository vendedorRepository;
 
     public void incluir(Vendedor v){
-        mapaVendedor.put(v.getCpf(), v);
+        vendedorRepository.save(v);
     }
 
     public Collection<Vendedor> obterLista(){
-//        mapaVendedor.keySet(); //retorna um Set
-        return mapaVendedor.values(); //retorna uma Collection
+        return (Collection<Vendedor>) vendedorRepository.findAll();
     }
 
 }

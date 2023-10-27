@@ -3,6 +3,7 @@ package br.edu.infnet.appvenda.loader;
 import br.edu.infnet.appvenda.model.domain.Carro;
 import br.edu.infnet.appvenda.model.domain.Moto;
 import br.edu.infnet.appvenda.model.domain.Produto;
+import br.edu.infnet.appvenda.model.domain.Vendedor;
 import br.edu.infnet.appvenda.model.service.ProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -32,10 +33,12 @@ public class ProdutoLoader implements ApplicationRunner {
 
         System.out.println("[Processamento iniciado]");
 
-        while(linha != null) {
+        Vendedor vendedor = null;
+        while (linha != null) {
             campos = linha.split(";");
+            vendedor = new Vendedor();
 
-            switch (campos[9]){
+            switch (campos[9]) {
                 case "C":
                     Carro carro = new Carro();
 
@@ -47,6 +50,9 @@ public class ProdutoLoader implements ApplicationRunner {
                     carro.setEstoque(Boolean.valueOf(campos[5]));
                     carro.setQuilometragem(campos[6]);
                     carro.setMotor(campos[7]);
+
+                    vendedor.setId(Integer.valueOf(campos[10]));
+                    carro.setVendedor(vendedor);
 
                     produtoService.incluir(carro);
 
@@ -63,6 +69,9 @@ public class ProdutoLoader implements ApplicationRunner {
                     moto.setQuilometragem(campos[7]);
                     moto.setCilindrada(campos[7]);
 
+                    vendedor.setId(Integer.valueOf(campos[10]));
+                    moto.setVendedor(vendedor);
+
                     produtoService.incluir(moto);
                     break;
                 default:
@@ -73,8 +82,13 @@ public class ProdutoLoader implements ApplicationRunner {
         }
         System.out.println("[Processamento finalizado com sucesso]");
 
-        for(Produto p : produtoService.obterLista()){
+        for (Produto p : produtoService.obterLista()) {
             System.out.println("[Produto] - " + p);
+        }
+
+        System.out.println("Produtos do vendedor " + vendedor.getId());
+        for(Produto p : produtoService.obterLista(vendedor)){
+            System.out.println("[Produto]" + p);
         }
 
     }

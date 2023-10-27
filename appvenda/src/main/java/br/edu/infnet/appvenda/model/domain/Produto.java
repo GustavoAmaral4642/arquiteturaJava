@@ -1,7 +1,15 @@
 package br.edu.infnet.appvenda.model.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "TProduto")
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Produto {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private int codigo;
     private String marca;
     private String modelo;
@@ -9,6 +17,17 @@ public class Produto {
     private float preco;
     private boolean estoque;
     private String quilometragem;
+    @ManyToOne
+    @JoinColumn(name="idVendedor")
+    private Vendedor vendedor;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -66,8 +85,17 @@ public class Produto {
         this.quilometragem = quilometragem;
     }
 
+    @ManyToOne
+    public Vendedor getVendedor() {
+        return vendedor;
+    }
+
+    public void setVendedor(Vendedor vendedor) {
+        this.vendedor = vendedor;
+    }
+
     @Override
     public String toString() {
-        return String.format("%d - %s - %s - %d - %.2f - %s - %s", getCodigo(), getMarca(), getModelo(), getAno(), getPreco(), getQuilometragem(), isEstoque());
+        return String.format("%d - %s - %s - %d - %.2f - %s - %s", getId(), getMarca(), getModelo(), getAno(), getPreco(), getQuilometragem(), isEstoque());
     }
 }

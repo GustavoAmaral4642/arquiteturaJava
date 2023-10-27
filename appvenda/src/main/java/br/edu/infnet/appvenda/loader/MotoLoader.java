@@ -1,6 +1,7 @@
 package br.edu.infnet.appvenda.loader;
 
 import br.edu.infnet.appvenda.model.domain.Moto;
+import br.edu.infnet.appvenda.model.domain.Vendedor;
 import br.edu.infnet.appvenda.model.service.MotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -43,7 +44,10 @@ public class MotoLoader implements ApplicationRunner {
             moto.setCilindrada(campos[7]);
             moto.setInjecaoEletronica(Boolean.valueOf(campos[8]));
 
-//            System.out.println("[Moto] - " + moto.toString());
+            Vendedor vendedor = new Vendedor();
+            vendedor.setId(Integer.valueOf(campos[9]));
+            moto.setVendedor(vendedor);
+
             motoService.incluir(moto);
             linha = leitura.readLine();
         }

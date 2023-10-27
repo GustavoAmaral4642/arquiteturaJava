@@ -14,17 +14,6 @@ import java.io.FileReader;
 @Order(1)
 @Component
 public class VendedorLoader implements ApplicationRunner {
-//
-//    private Map<String,Vendedor> mapaVendedor = new HashMap<String,Vendedor>();
-//
-//    private void incluir(Vendedor v){
-//        mapaVendedor.put(v.getCpf(), v);
-//    }
-//
-//    private Collection<Vendedor> obterLista(){
-////        mapaVendedor.keySet(); //retorna um Set
-//        return mapaVendedor.values(); //retorna uma Collection
-//    }
 
     @Autowired
     private VendedorService vendedorService;
@@ -39,7 +28,6 @@ public class VendedorLoader implements ApplicationRunner {
         String linha = leitura.readLine();
         String[] campos = null;
 
-//        System.out.println(leitura.readLine());
         System.out.println("[Processamento iniciado]");
         while(linha != null) {
             campos = linha.split(";");
@@ -59,16 +47,6 @@ public class VendedorLoader implements ApplicationRunner {
         }
 
         leitura.close();
-
-//        Vendedor vendedor = new Vendedor();
-//
-//        vendedor.setNome("Luiz Gustavo do Amaral Correa");
-//        vendedor.setCpf("358.624.988-85");
-//        vendedor.setEmail("gustavo.lgac@gmail.com");
-//
-//        System.out.println("Nome: " + vendedor.getNome());
-//        System.out.println(vendedor.toString());
-
 
     }
 }
