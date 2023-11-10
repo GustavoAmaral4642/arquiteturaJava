@@ -3,12 +3,14 @@ package br.edu.infnet.appvenda.loader;
 import br.edu.infnet.appvenda.model.domain.Carro;
 import br.edu.infnet.appvenda.model.domain.Vendedor;
 import br.edu.infnet.appvenda.model.service.CarroService;
+import br.edu.infnet.appvenda.utils.FileLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import javax.validation.ConstraintViolationException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -48,7 +50,11 @@ public class CarroLoader implements ApplicationRunner {
             vendedor.setId(Integer.valueOf(campos[9]));
             carro.setVendedor(vendedor);
 
-            carroService.incluir(carro);
+            try {
+                carroService.incluir(carro);
+            } catch (ConstraintViolationException c){
+                FileLogger.logException("[Carro] " + carro + c.getMessage());
+            }
             linha = leitura.readLine();
         }
         System.out.println("[Processamento finalizado com sucesso]");

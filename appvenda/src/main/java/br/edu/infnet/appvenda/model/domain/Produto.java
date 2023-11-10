@@ -1,6 +1,10 @@
 package br.edu.infnet.appvenda.model.domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Table(name = "TProduto")
@@ -10,12 +14,19 @@ public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull
+    @Column(unique = true)
     private int codigo;
+    @NotBlank
     private String marca;
+    @NotBlank
     private String modelo;
+    @PositiveOrZero
     private int ano;
+    @Positive
     private float preco;
     private boolean estoque;
+    @NotBlank
     private String quilometragem;
     @ManyToOne
     @JoinColumn(name="idVendedor")
@@ -96,6 +107,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return String.format("%d - %s - %s - %d - %.2f - %s - %s", getId(), getMarca(), getModelo(), getAno(), getPreco(), getQuilometragem(), isEstoque());
+        return String.format("%d - %s - %s - %d - %.2f - %s - %s - vendedor [%s]", getId(), getMarca(), getModelo(), getAno(), getPreco(), getQuilometragem(), isEstoque(), getVendedor());
     }
 }

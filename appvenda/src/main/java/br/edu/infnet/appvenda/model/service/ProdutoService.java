@@ -32,4 +32,11 @@ public class ProdutoService {
         return (Collection<Produto>) produtoRepository.buscaPorId(vendedor.getId());
     }
 
+    public Long obterQuantidade(){
+        return produtoRepository.count();
+    }
+
+    public void excluir(Integer id){
+        produtoRepository.deleteById(id);
+    }
 }

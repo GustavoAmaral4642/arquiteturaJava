@@ -5,12 +5,14 @@ import br.edu.infnet.appvenda.model.domain.Moto;
 import br.edu.infnet.appvenda.model.domain.Produto;
 import br.edu.infnet.appvenda.model.domain.Vendedor;
 import br.edu.infnet.appvenda.model.service.ProdutoService;
+import br.edu.infnet.appvenda.utils.FileLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import javax.validation.ConstraintViolationException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -54,7 +56,11 @@ public class ProdutoLoader implements ApplicationRunner {
                     vendedor.setId(Integer.valueOf(campos[10]));
                     carro.setVendedor(vendedor);
 
-                    produtoService.incluir(carro);
+                    try {
+                        produtoService.incluir(carro);
+                    } catch (ConstraintViolationException c){
+                        FileLogger.logException("[Carro] " + carro + c.getMessage());
+                    }
 
                     break;
                 case "M":
@@ -72,7 +78,11 @@ public class ProdutoLoader implements ApplicationRunner {
                     vendedor.setId(Integer.valueOf(campos[10]));
                     moto.setVendedor(vendedor);
 
-                    produtoService.incluir(moto);
+                    try {
+                        produtoService.incluir(moto);
+                    } catch (ConstraintViolationException c){
+                        FileLogger.logException("[Moto] " + moto + c.getMessage());
+                    }
                     break;
                 default:
                     break;

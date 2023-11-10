@@ -25,4 +25,11 @@ public class MotoService {
         return (Collection<Moto>) motoRepository.findAll();
     }
 
+    public Long obterQuantidade(){
+        return motoRepository.count();
+    }
+
+    public void excluir(Integer id){
+        motoRepository.deleteById(id);
+    }
 }

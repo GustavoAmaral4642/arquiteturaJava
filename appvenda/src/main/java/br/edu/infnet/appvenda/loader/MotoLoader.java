@@ -3,12 +3,14 @@ package br.edu.infnet.appvenda.loader;
 import br.edu.infnet.appvenda.model.domain.Moto;
 import br.edu.infnet.appvenda.model.domain.Vendedor;
 import br.edu.infnet.appvenda.model.service.MotoService;
+import br.edu.infnet.appvenda.utils.FileLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
+import javax.validation.ConstraintViolationException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
@@ -48,7 +50,11 @@ public class MotoLoader implements ApplicationRunner {
             vendedor.setId(Integer.valueOf(campos[9]));
             moto.setVendedor(vendedor);
 
-            motoService.incluir(moto);
+            try {
+                motoService.incluir(moto);
+            } catch (ConstraintViolationException c){
+                FileLogger.logException("[Moto] " + moto + c.getMessage());
+            }
             linha = leitura.readLine();
         }
         System.out.println("[Processamento finalizado com sucesso]");
