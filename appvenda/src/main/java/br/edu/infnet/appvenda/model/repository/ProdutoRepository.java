@@ -6,10 +6,13 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface ProdutoRepository extends CrudRepository<Produto, Integer> {
 
     @Query("from Produto p where p.vendedor.id = :idvendedor")
     public Collection<Produto> buscaPorId(Integer idvendedor);
+
+    List<Produto> findByModelo(String modelo);
 }

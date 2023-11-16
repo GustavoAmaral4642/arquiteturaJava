@@ -82,6 +82,6 @@ public class Endereco {
 
     @Override
     public String toString() {
-        return String.format("cep (%s) - bairro(%s) - uf(%s)", getCep(), getBairro(), getUf());
+        return String.format("[cep] (%s) - [bairro](%s) - [uf](%s)", getCep(), getBairro(), getUf());
     }
 }

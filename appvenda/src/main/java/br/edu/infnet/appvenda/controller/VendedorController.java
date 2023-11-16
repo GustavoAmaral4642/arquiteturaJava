@@ -1,5 +1,6 @@
 package br.edu.infnet.appvenda.controller;
 
+import br.edu.infnet.appvenda.model.domain.Vendedor;
 import br.edu.infnet.appvenda.model.service.VendedorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,18 @@ public class VendedorController {
 
     @Autowired
     private VendedorService vendedorService;
+
+    @GetMapping("/vendedor/pesquisar")
+    public String pesquisar(Model model, String campoBusca){
+
+        Vendedor vendedor = vendedorService.pesquisar(campoBusca);
+
+        if(vendedor != null){
+            model.addAttribute("objeto", vendedor);
+            return appController.showHome(model);
+        }
+        return "redirect:/vendedor/lista";
+    }
 
     @GetMapping(value = "/vendedor/lista")
     public String obterListaVendedor(Model model){

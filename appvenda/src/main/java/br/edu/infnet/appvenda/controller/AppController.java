@@ -1,9 +1,6 @@
 package br.edu.infnet.appvenda.controller;
 
-import br.edu.infnet.appvenda.model.service.CarroService;
-import br.edu.infnet.appvenda.model.service.MotoService;
-import br.edu.infnet.appvenda.model.service.ProdutoService;
-import br.edu.infnet.appvenda.model.service.VendedorService;
+import br.edu.infnet.appvenda.model.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +18,16 @@ public class AppController {
     @Autowired
     private MotoService motoService;
 
+    @Autowired
+    private VendasService vendasService;
+
     @GetMapping(value = "/")
     public String showHome(Model model){
-
+        model.addAttribute("informacoes", vendasService.obterInformacao());
         model.addAttribute("qtdeVendedor", vendedorService.obterQuantidade() );
         model.addAttribute("qtdeProduto", produtoService.obterQuantidade());
         model.addAttribute("qtdeCarro", carroService.obterQuantidade());
         model.addAttribute("qtdeMoto", motoService.obterQuantidade());
         return "home";
     }
-
-
-
 }

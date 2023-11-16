@@ -30,6 +30,6 @@ public class Moto  extends Produto{
 
     @Override
     public String toString() {
-        return String.format("%s - %s - %s", super.toString(), getCilindrada(), isInjecaoEletronica());
+        return String.format("%s - [cilindrada]: %s - [injeção eletrônica]:%s", super.toString(), getCilindrada(), isInjecaoEletronica());
     }
 }

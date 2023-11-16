@@ -6,10 +6,7 @@ import br.edu.infnet.appvenda.model.repository.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProdutoService {
@@ -17,6 +14,10 @@ public class ProdutoService {
     @Autowired
     private ProdutoRepository produtoRepository;
     private Map<Integer, Produto> mapaProduto = new HashMap<Integer,Produto>();
+
+    public List<Produto> pesquisar(String modelo){
+        return produtoRepository.findByModelo(modelo);
+    }
 
     public void incluir(Produto p){
 

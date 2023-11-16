@@ -22,11 +22,12 @@ public class Vendedor {
     private String nome;
     //@CPF
     @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")
+    @Column(unique = true)
     private String cpf;
     @Email
     @Column(unique = true)
     private String email;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name="idVendedor")
     private List<Produto> produtos;
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -83,6 +84,6 @@ public class Vendedor {
 
     @Override
     public String toString() {
-        return String.format("%d - %s - %s - %s - %s - produtos (%d)",getId(), getNome(), getEmail(), getCpf(), getEndereco(), produtos != null ? produtos.size() : 0);
+        return String.format("[id]: %d - [nome]: %s - [e-mail]: %s - [cpf]: %s - [endereço]: %s - produtos (%d)",getId(), getNome(), getEmail(), getCpf(), getEndereco(), produtos != null ? produtos.size() : 0);
     }
 }

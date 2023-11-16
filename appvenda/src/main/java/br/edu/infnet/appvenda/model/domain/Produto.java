@@ -96,7 +96,6 @@ public class Produto {
         this.quilometragem = quilometragem;
     }
 
-    @ManyToOne
     public Vendedor getVendedor() {
         return vendedor;
     }
@@ -107,6 +106,6 @@ public class Produto {
 
     @Override
     public String toString() {
-        return String.format("%d - %s - %s - %d - %.2f - %s - %s - vendedor [%s]", getId(), getMarca(), getModelo(), getAno(), getPreco(), getQuilometragem(), isEstoque(), getVendedor());
+        return String.format("[id]: %d - [marca]: %s - [modelo]: %s - [ano] %d - [preço]: %.2f - [Quilometragem]: %s - [estoque]: %s - vendedor [%s]", getId(), getMarca(), getModelo(), getAno(), getPreco(), getQuilometragem(), isEstoque(), getVendedor());
     }
 }

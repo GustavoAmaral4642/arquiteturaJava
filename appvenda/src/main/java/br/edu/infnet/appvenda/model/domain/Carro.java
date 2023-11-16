@@ -29,6 +29,6 @@ public class Carro extends Produto{
 
     @Override
     public String toString() {
-        return String.format("%s - %s - %s", super.toString(), getMotor(), isArCondicionado());
+        return String.format("%s - [motor]: %s - [ar condicionado]: %s", super.toString(), getMotor(), isArCondicionado());
     }
 }
