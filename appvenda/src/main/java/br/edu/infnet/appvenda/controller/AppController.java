@@ -19,11 +19,11 @@ public class AppController {
     private MotoService motoService;
 
     @Autowired
-    private VendasService vendasService;
+    private InformacaoService informacaoService;
 
     @GetMapping(value = "/")
     public String showHome(Model model){
-        model.addAttribute("informacoes", vendasService.obterInformacao());
+        model.addAttribute("informacoes", informacaoService.obterLista());
         model.addAttribute("qtdeVendedor", vendedorService.obterQuantidade() );
         model.addAttribute("qtdeProduto", produtoService.obterQuantidade());
         model.addAttribute("qtdeCarro", carroService.obterQuantidade());

@@ -64,23 +64,38 @@
         </table>
     </c:if>
 
-    <c:if test="${not empty informacoes}">
-        <table class="table">
-            <thead class="table-dark">
-            <tr>
-                <th>Informações</th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach var="item" items="${informacoes}">
-                <tr>
-                    <td>${item}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </c:if>
+    <c:if test="${empty listagem}">
+        <form action="/informacoes/incluir" method="post">
+            <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Entre com o campo" name="campo">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" placeholder="Entre com a descrição" name="descricao">
+                </div>
+                <div class="col">
+                    <button class="btn btn-primary" type="submit">Cadastrar</button>
+                </div>
+            </div>
+        </form>
 
+        <c:if test="${not empty informacoes}">
+            <table class="table">
+                <thead class="table-dark">
+                <tr>
+                    <th>Informações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <c:forEach var="item" items="${informacoes}">
+                    <tr>
+                        <td>${item}</td>
+                    </tr>
+                </c:forEach>
+                </tbody>
+            </table>
+        </c:if>
+    </c:if>
     <c:if test="${not empty objeto}">
         <hr>
         <div class="alert alert-success">
